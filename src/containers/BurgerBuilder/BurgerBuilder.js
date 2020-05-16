@@ -20,7 +20,8 @@ class BurgerBuilder extends Component {
             meat: 0
         },
         totalPrice: 4,
-        purchasable: false
+        purchasable: false,
+        ordered: false
     }
 
     upsatePurchaseState = (crt_ingredients) => {
@@ -46,13 +47,17 @@ class BurgerBuilder extends Component {
         this.upsatePurchaseState(crt_ingredients);
     }
 
+    orderHandler = () => {
+        this.setState({ordered: true});
+    }
+
     render () {
         const disabledInfo = {...this.state.ingredients};
         for(let ingr in disabledInfo)
             disabledInfo[ingr] = disabledInfo[ingr] <= 0;
         return (
             <Fragment>
-                <Modal>
+                <Modal show={this.state.ordered}>
                     <OrderSummary ingredients={this.state.ingredients}/>
                 </Modal>
                 <Burger ingredients={this.state.ingredients}/>
@@ -61,6 +66,7 @@ class BurgerBuilder extends Component {
                     removeIngredient={this.removeIngredientHandler}
                     disabled={disabledInfo}
                     purchasable={this.state.purchasable}
+                    onOrder={this.orderHandler}
                     price={this.state.totalPrice} />
             </Fragment>
         );

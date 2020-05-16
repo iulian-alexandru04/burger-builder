@@ -12,6 +12,16 @@
     transition: all 0.3s ease-out;
 }
 
+.Show {
+    transform: translate(0vw, 0vh);
+    opacity: 1;
+}
+
+.Hide {
+    transform: translate(0vw, -100vh);
+    opacity: 0;
+}
+
 @media (min-width: 600px) {
     .Modal {
         width: 500px;
