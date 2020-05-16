@@ -7,7 +7,11 @@ const controls = ['salad', 'bacon', 'cheese', 'meat'];
 const buildControls = (props) => (
     <div className={classes.BuildControls}>
         {controls.map(name => 
-            <BuildControl key={name} label={name} added={props.addIngredient}/>)}
+            <BuildControl 
+                key={name} 
+                label={name} 
+                added={() => props.addIngredient(name)}
+                removed={() => props.removeIngredient(name)}/>)}
     </div>
 );
 
