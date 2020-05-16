@@ -51,13 +51,17 @@ class BurgerBuilder extends Component {
         this.setState({ordered: true});
     }
 
+    cancelOrderHandler = () => {
+        this.setState({ordered: false});
+    }
+
     render () {
         const disabledInfo = {...this.state.ingredients};
         for(let ingr in disabledInfo)
             disabledInfo[ingr] = disabledInfo[ingr] <= 0;
         return (
             <Fragment>
-                <Modal show={this.state.ordered}>
+                <Modal show={this.state.ordered} onClose={this.cancelOrderHandler}>
                     <OrderSummary ingredients={this.state.ingredients}/>
                 </Modal>
                 <Burger ingredients={this.state.ingredients}/>
