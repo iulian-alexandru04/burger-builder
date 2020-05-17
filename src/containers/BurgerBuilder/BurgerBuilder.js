@@ -55,6 +55,10 @@ class BurgerBuilder extends Component {
         this.setState({ordered: false});
     }
 
+    continueOrderHandler = () => {
+        alert('Not implemented');
+    }
+
     render () {
         const disabledInfo = {...this.state.ingredients};
         for(let ingr in disabledInfo)
@@ -62,7 +66,10 @@ class BurgerBuilder extends Component {
         return (
             <Fragment>
                 <Modal show={this.state.ordered} onClose={this.cancelOrderHandler}>
-                    <OrderSummary ingredients={this.state.ingredients}/>
+                    <OrderSummary 
+                        ingredients={this.state.ingredients}
+                        onCancel={this.cancelOrderHandler}
+                        onContinue={this.continueOrderHandler}/>
                 </Modal>
                 <Burger ingredients={this.state.ingredients}/>
                 <BuildControls 
