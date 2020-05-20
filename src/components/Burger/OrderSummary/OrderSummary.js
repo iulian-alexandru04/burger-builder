@@ -12,9 +12,9 @@ const orderSummary = (props) => {
             <p><strong>Total Price: {props.price.toFixed(2)}</strong></p>
             <p>Continue to checkout?</p>
             <Button type='Danger' clicked={props.onCancel}>CANCEL</Button>
-            <Button type='Success'clicked={props.onContinue}>CONTINUE</Button>
+            <Button type='Success' clicked={props.onContinue}>CONTINUE</Button>
         </Fragment>
     );
-};
+}
 
 export default orderSummary;
