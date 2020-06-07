@@ -10,7 +10,7 @@ const sideDrawer = (props) => {
     return (
         <Fragment>
             <Backdrop show={props.isOpen} clicked={props.onClose} />
-            <div className={assignedClasses}>
+            <div className={assignedClasses} onClick={props.onClose}>
                 <div className={classes.Logo}><Logo /></div>
                 <nav>
                     <NavigationItems isAuth={props.isAuth} />
