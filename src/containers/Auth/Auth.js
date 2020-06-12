@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import {checkValidity} from '../../shared/utility';
 import classes from './Auth.module.css';
 import * as actions from '../../store/actions/index';
 
@@ -47,23 +48,13 @@ class Auth extends Component {
             this.props.onSetAuthRedirectPath();
     }
 
-    checkValidity(value, rules) {
-        if(rules.required && value.trim() === '')
-            return false;
-        if(rules.minLength && value.trim().length < rules.minLength)
-            return false;
-        if(rules.maxLength && value.trim().length > rules.maxLength)
-            return false;
-        return true;
-    }
-
     inputChangedHandler = (event, controlName) => {
         const updatedControls = {
             ...this.state.controls,
             [controlName]: {
                 ...this.state.controls[controlName],
                 value: event.target.value,
-                valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
+                valid: checkValidity(event.target.value, this.state.controls[controlName].validation),
                 touched: true
             }
         };

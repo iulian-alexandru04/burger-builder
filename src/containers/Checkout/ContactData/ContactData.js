@@ -6,6 +6,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 import classes from './ContactData.module.css';
 import axios from '../../../axios-order';
+import {checkValidity} from '../../../shared/utility';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions/index';
 
@@ -111,16 +112,6 @@ class ContactData extends Component {
         this.props.onOrderBurger(order, this.props.token);
     }
 
-    checkValidity(value, rules) {
-        if(rules.required && value.trim() === '')
-            return false;
-        if(rules.minLength && value.trim().length < rules.minLength)
-            return false;
-        if(rules.maxLength && value.trim().length > rules.maxLength)
-            return false;
-        return true;
-    }
-
     inputChangedHandler = (event, inputId) => {
         const updatedOrderForm = {
             ...this.state.orderForm
@@ -130,7 +121,7 @@ class ContactData extends Component {
         };
         updatedFormElement.value = event.target.value;
         updatedFormElement.touched = true;
-        updatedFormElement.valid = this.checkValidity(event.target.value, updatedFormElement.validation);
+        updatedFormElement.valid = checkValidity(event.target.value, updatedFormElement.validation);
         updatedOrderForm[inputId] = updatedFormElement;
         
         const formIsValid = Object.keys(updatedOrderForm)
