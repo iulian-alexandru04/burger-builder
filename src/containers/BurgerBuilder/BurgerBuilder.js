@@ -11,10 +11,11 @@ import * as actions from '../../store/actions/index';
 
 const BurgerBuilder = props => {
     const [isOrdered, setOrderedStatus] = useState(false);
+    const {onInitIngredients} = props;
 
     useEffect(() => {
-        props.onInitIngredients();
-    }, []);
+        onInitIngredients();
+    }, [onInitIngredients]);
 
     const isPurchasable = (crt_ingredients) => {
         const noIngredients = Object.keys(crt_ingredients)
